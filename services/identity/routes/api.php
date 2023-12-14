@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/', static fn () => response()->json([
+    'app' => config('app.name'),
+    'time' => time(),
+]));
 
-Route::get('login', function() {
-    
-});
+Route::get('login', LoginController::class)->name('auth:login');
+Route::get('register', RegisterController::class)->name('auth:register');
