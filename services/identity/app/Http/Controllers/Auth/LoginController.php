@@ -8,6 +8,7 @@ use App\Exceptions\AuthenticationException;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Services\AccessTokenService;
 use Illuminate\Contracts\Auth\Factory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Support\Responsable;
 use Treblle\Tools\Http\Responses\MessageResponse;
 
@@ -25,7 +26,13 @@ final class LoginController
      */
     public function __invoke(LoginRequest $request): Responsable
     {
-        if ( $this->auth->guard()->attempt($request->only('email', 'password')) ) {
+        return new MessageResponse(
+            data: [
+                'data' => $request->validated(),
+            ]
+        );
+
+        if ( $this->auth->guard()->attempt( $request->only('email', 'password') ) ) {
             throw new AuthenticationException(
                 message: 'Invalid credentials for login',
                 code: 422
