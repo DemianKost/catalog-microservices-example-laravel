@@ -21,5 +21,5 @@ Route::get('/', static fn () => response()->json([
     'time' => time(),
 ]));
 
-Route::get('login', LoginController::class)->name('auth:login');
-Route::get('register', RegisterController::class)->name('auth:register');
+Route::post('login', LoginController::class)->name('auth:login');
+Route::post('register', RegisterController::class)->name('auth:register');

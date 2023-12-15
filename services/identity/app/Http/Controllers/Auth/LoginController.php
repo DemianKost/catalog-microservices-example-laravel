@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Exceptions\AuthenticationException;
-use App\Http\Request\Auth\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Services\AccessTokenService;
 use Illuminate\Contracts\Auth\Factory;
+use Illuminate\Contracts\Support\Responsable;
 use Treblle\Tools\Http\Responses\MessageResponse;
 
 final class LoginController
@@ -17,7 +18,12 @@ final class LoginController
         private AccessTokenService $service
     ) {}
 
-    public function __invoke(LoginRequest $request)
+    /**
+     * @param LoginRequest $request
+     * @return Responsable
+     * @throws AuthenticationException
+     */
+    public function __invoke(LoginRequest $request): Responsable
     {
         if ( $this->auth->guard()->attempt($request->only('email', 'password')) ) {
             throw new AuthenticationException(

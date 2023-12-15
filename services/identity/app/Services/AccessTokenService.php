@@ -7,9 +7,14 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 final class AccessTokenService
 {
+    /**
+     * @param User<Authenticatable> $user
+     * @return string
+     */
     public function create(User $user): string
     {
         $token = Str::random(40);
