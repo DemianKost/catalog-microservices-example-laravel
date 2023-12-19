@@ -26,12 +26,6 @@ final class LoginController
      */
     public function __invoke(LoginRequest $request): Responsable
     {
-        return new MessageResponse(
-            data: [
-                'data' => $request->validated(),
-            ]
-        );
-
         if ( $this->auth->guard()->attempt( $request->only('email', 'password') ) ) {
             throw new AuthenticationException(
                 message: 'Invalid credentials for login',
