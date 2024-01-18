@@ -48,5 +48,3 @@ it('it will store an access token in cache', function(): void {
         Cache::get($response->json('message'))
     );
 });
-
-todo('it will return the access code in the response.');
