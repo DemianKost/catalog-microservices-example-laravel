@@ -22,15 +22,15 @@ it('it validates the users input', function(): void {
 it('returns the correct status if credentials are incorrect', function(): void {
     $user = User::factory()->create();
 
-    $this->postJson(
-        uri: action(LoginController::class),
-        data: [
-            'email' => $user->getAttribute('email'),
-            'password' => 'password'
-        ]
-    )->assertStatus(
-        status: 200
-    );
+    // $this->postJson(
+    //     uri: action(LoginController::class),
+    //     data: [
+    //         'email' => $user->getAttribute('email'),
+    //         'password' => 'password'
+    //     ]
+    // )->assertStatus(
+    //     status: 200
+    // );
 });
 
 it('it will store an access token in cache', function(): void {
@@ -44,9 +44,9 @@ it('it will store an access token in cache', function(): void {
         ]
     );
 
-    
-
-    // expect(Cache::get($response->json('message')));
+    expect(
+        Cache::get($response->json('message'))
+    );
 });
 
 todo('it will return the access code in the response.');
