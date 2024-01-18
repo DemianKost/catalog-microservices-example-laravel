@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AccessTokenService;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Facades\Hash;
 use Treblle\Tools\Http\Enums\Status;
 use Treblle\Tools\Http\Responses\MessageResponse;
@@ -16,7 +17,11 @@ final class RegisterController
         private readonly AccessTokenService $service,
     ) {}
     
-    public function __invoke(RegisterRequest $request)
+    /**
+     * @param RegisterRequest $request
+     * @return Responsable
+     */
+    public function __invoke(RegisterRequest $request): Responsable
     {
         $user = $this->service->createUser(
             data: [
@@ -28,13 +33,11 @@ final class RegisterController
             ]
         );
 
-        $token = $this->service->create(
-            user: $user
-        );
-
         return new MessageResponse(
             data: [
-                'message' => $this
+                'message' => $this->service->create(
+                    user: $user
+                )
             ],
             status: Status::CREATED,
         );
