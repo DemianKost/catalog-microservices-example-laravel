@@ -31,9 +31,7 @@ final class ServiceAuthentication
             search: 'Bearer ',
         )->toString();
 
-        dd( Redis::get($token) );
-
-        if ( ! $identity = Redis::get('laravel_database_' . $token) ) {
+        if ( ! $identity = Redis::get($token) ) {
             throw new AuthenticationException(
                 message: 'Invalid Access Token',
                 guards: ['api']
