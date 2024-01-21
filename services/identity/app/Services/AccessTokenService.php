@@ -7,8 +7,8 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 final class AccessTokenService
@@ -37,15 +37,13 @@ final class AccessTokenService
     {
         $token = Str::random(40);
 
-        Cache::put(
-            key: $token,
-            value: [
+        Redis::set(
+            $token,
+            json_encode([
                 'id' => $user->getKey(),
                 'role' => $user->getAttribute('role')
-            ],
-            ttl: now()->addHours(5)
+            ])
         );
-
         return $token;
     }
 }
