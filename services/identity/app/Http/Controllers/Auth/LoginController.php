@@ -26,7 +26,7 @@ final class LoginController
      */
     public function __invoke(LoginRequest $request): Responsable
     {
-        if ( $this->auth->guard()->attempt( $request->only('email', 'password') ) ) {
+        if ( ! $this->auth->guard()->attempt( $request->only('email', 'password') ) ) {
             throw new AuthenticationException(
                 message: 'Invalid credentials for login',
                 code: 422
@@ -34,7 +34,7 @@ final class LoginController
         }
         
         $token = $this->service->create(
-            user: $this->auth()->guard()->user()
+            user: $this->auth->guard()->user()
         );
 
         return new MessageResponse(
