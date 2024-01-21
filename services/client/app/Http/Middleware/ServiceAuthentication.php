@@ -31,12 +31,14 @@ final class ServiceAuthentication
             search: 'Bearer ',
         )->toString();
 
-        if ( ! Cache::get($token) ) {
+        if ( ! $identity = Cache::get($token) ) {
             throw new AuthenticationException(
                 message: 'Invalid Access Token',
                 guards: ['api']
             );
         }
+
+        
 
         return $next($request);
     }

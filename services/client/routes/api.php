@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
@@ -8,7 +7,7 @@ Route::get('/', function() {
 });
 
 Route::middleware('service-auth')->prefix('clients')->as('clients:')->group( static function(): void {
-    Route::get('/')->name('list');
+    Route::get('/', App\Http\Controllers\Clients\IndexController::class)->name('list');
     Route::post('/')->name('register');
     Route::put('{ulid}')->name('update');
     Route::delete('{ulid}')->name('delete');
