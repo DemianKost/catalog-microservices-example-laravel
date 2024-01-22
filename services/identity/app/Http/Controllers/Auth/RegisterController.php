@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Role;
 use App\Exceptions\AuthenticationException;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AccessTokenService;
@@ -33,7 +34,8 @@ final class RegisterController
                     'email' => $request->string('email')->toString(),
                     'password' => Hash::make(
                         value: $request->string('password')->toString()
-                    )
+                    ),
+                    'role' => Role::ADMIN,
                 ]
             );
         } catch ( Throwable $exception ) {

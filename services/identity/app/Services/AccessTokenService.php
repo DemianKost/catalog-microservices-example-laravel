@@ -39,10 +39,13 @@ final class AccessTokenService
 
         Redis::set(
             $token,
-            json_encode([
-                'id' => $user->getKey(),
-                'role' => $user->getAttribute('role')
-            ])
+            json_encode(
+                value: [
+                    'id' => $user->getKey(),
+                    'role' => $user->role
+                ],
+                flags: JSON_THROW_ON_ERROR,
+            )
         );
         return $token;
     }

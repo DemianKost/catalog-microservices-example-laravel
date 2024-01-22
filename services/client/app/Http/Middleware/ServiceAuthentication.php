@@ -38,6 +38,14 @@ final class ServiceAuthentication
             );
         }
 
+        $request->merge([
+            'identity' => json_decode(
+                json: $identity,
+                associative: true,
+                flags: JSON_THROW_ON_ERROR
+            )
+        ]);
+
         return $next($request);
     }
 }
