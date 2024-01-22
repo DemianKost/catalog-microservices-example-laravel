@@ -10,8 +10,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
+use Carbon\CarbonInterface;
 
-class Client extends Model
+/**
+ * @property-read string $id
+ * @property-read string $name
+ * @property-read string $email
+ * @property-read CarbonInterface $created_at
+ * @property-read CarbonInterface $updated_at
+ */
+final class Client extends Model
 {
     use HasFactory;
     use HasUlids;
