@@ -16,10 +16,18 @@ use Treblle\Tools\Http\Enums\Status;
 
 final class IndexController
 {
+    /**
+     * @param AuthorizationService $service
+     */
     public function __construct(
         private readonly AuthorizationService $service,
     ) {}
 
+    /**
+     * @param Request $request
+     * @return Responsable
+     * @throws AuthorizationException
+     */
     public function __invoke(Request $request): Responsable
     {
         if ( ! $this->service->listClients(
