@@ -12,7 +12,7 @@ use App\Http\Resources\ClientResource;
 use Illuminate\Contracts\Support\Responsable;
 use Throwable;
 use Treblle\Tools\Http\Enums\Status;
-use Treblle\Tools\Http\Responses\ModelResponse;
+use JustSteveKing\Launchpad\Http\Responses\ModelResponse;
 
 final readonly class StoreController
 {

@@ -12,7 +12,7 @@ final class NewClient
      * @param string $company
      */
     public function __construct(
-        private readonly string $name,
+        public readonly string $name,
         public readonly string $email,
         public string $company,
     ) {}
