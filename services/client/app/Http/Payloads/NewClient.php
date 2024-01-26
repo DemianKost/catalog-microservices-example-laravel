@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Payloads;
 
-final readonly class NewClient
+final class NewClient
 {
     /**
      * @param string $name
@@ -12,19 +12,30 @@ final readonly class NewClient
      * @param string $company
      */
     public function __construct(
-        private string $name,
-        private string $email,
+        private readonly string $name,
+        public readonly string $email,
         public string $company,
     ) {}
 
     /**
-     * @return array{name:string,email:string}
+     * @param string $company
+     */
+    public function company(string $company): NewClient
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return array{name:string,email:string,company:string}
      */
     public function toArray(): array
     {
         return [
             'name' => $this->name,
             'email' => $this->email,
+            'company_id' => $this->company,
         ];
     }
 

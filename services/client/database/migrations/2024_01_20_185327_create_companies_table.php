@@ -14,7 +14,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
 
             $table->string('name');
-            $table->string('website');
+            $table->string('website')->nullable();
             $table->string('email')->unique();
 
             
