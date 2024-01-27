@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Carbon\CarbonInterface;
@@ -49,6 +50,17 @@ final class Client extends Model
     {
         return $this->hasOne(
             related: Member::class,
+            foreignKey: 'client_id'
+        );
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(
+            related: Order::class,
             foreignKey: 'client_id'
         );
     }
