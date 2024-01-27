@@ -12,6 +12,7 @@ use App\Services\AuthorizationService;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use JustSteveKing\Launchpad\Http\Responses\CollectionResponse;
+use Spatie\QueryBuilder\QueryBuilder;
 use Treblle\Tools\Http\Enums\Status;
 
 final class IndexController
@@ -41,7 +42,11 @@ final class IndexController
 
         return new CollectionResponse(
             data: ClientResource::collection(
-                resource: Client::query()->latest()->paginate(),
+                resource: QueryBuilder::for(
+                    subject: Client::query(),
+                )->allowedIncludes([
+                    'company'
+                ])->latest()->paginate(),
             )
         );
     }

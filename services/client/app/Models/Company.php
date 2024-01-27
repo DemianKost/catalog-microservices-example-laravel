@@ -9,8 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Carbon\CarbonInterface;
 
-class Company extends Model
+/**
+ * @property-read string $id
+ * @property-read string $name
+ * @property-read string $website
+ * @property-read string $email
+ * @property-read CarbonInterface $created_at
+ * @property-read CarbonInterface $updated_at
+ */
+final class Company extends Model
 {
     use HasFactory;
     use HasUlids;
