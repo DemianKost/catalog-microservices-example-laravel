@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Order extends Model
 {
@@ -38,6 +39,17 @@ final class Order extends Model
         return $this->belongsTo(
             related: Client::class,
             foreignKey: 'client_id'
+        );
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(
+            related: OrderItem::class,
+            foreignKey: 'order_id',
         );
     }
 }
