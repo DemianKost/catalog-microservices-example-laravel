@@ -72,4 +72,29 @@ final class Product extends Model
             foreignKey: 'warehouse_id',
         );
     }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => $this->getKey(),
+            'name' => $this->getAttribute('name'),
+            'status' => $this->getAttribute('status'),
+            'description' => $this->getAttribute('description'),
+            'price' => $this->getAttribute('price'),
+            'cost' => $this->getAttribute('cost'),
+            'weight' => $this->getAttribute('weight'),
+            'stock' => $this->getAttribute('stock'),
+            'dimensions' => $this->getAttribute('dimensions'),
+            'category' => [
+                'name' => $this->category->getAttribute('name'),
+            ],
+            'supplier' => [
+                'name' => $this->supplier->getAttribute('name'),
+                'reference' => $this->supplier->getAttribute('reference'),
+            ],
+            'warehouse_id' => [
+                'name' => $this->warehouse->getAttribute('name'),
+            ],
+        ];
+    }
 }
