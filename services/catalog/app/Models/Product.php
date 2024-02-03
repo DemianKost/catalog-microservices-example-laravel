@@ -40,6 +40,10 @@ final class Product extends Model
         'cost' => MoneyCast::class,
     ];
 
+    public function makeAllSearchableUsing() {
+
+    }
+
     /**
      * @return BelongsTo
      */
