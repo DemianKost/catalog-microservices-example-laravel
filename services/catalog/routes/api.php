@@ -11,13 +11,5 @@ Route::get('/', function() {
 });
 
 Route::middleware('service-auth')->prefix('clients')->as('clients:')->group( static function(): void {
-    Route::get('/', ClientsIndex::class)->name('list');
-    Route::post('/', ClientsStore::class,)->name('register');
-    Route::put('{ulid}')->name('update');
-    Route::delete('{ulid}')->name('delete');
-
-    Route::prefix('{ulid}')->group( static function(): void {
-        Route::get('orders', OrdersIndex::class)->name('orders:list');
-
-    });
+    // 
 });
